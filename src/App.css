@@ -63,7 +63,7 @@
   }
   
   h2 {
-    font-size: 4.2rem;
+    font-size: 3rem;
   }
   
   ul {
@@ -127,7 +127,7 @@
   /* Welcome section */
   
   .welcome-section {
-    color: chocolate;
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -140,9 +140,10 @@
   }
   
   .welcome-section > p {
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: 200;
-    color: chocolate;
+    color: white;
+    justify-content: start;
   }
   
   /* Projects section */
