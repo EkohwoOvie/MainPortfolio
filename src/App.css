@@ -30,16 +30,27 @@ h1, h2 { font-family: "Lobster", "Raleway", sans-serif; text-align: center; }
 h1 { font-size: 5rem; margin-bottom: 2rem; }
 h2 { font-size: 4rem; }
 a { text-decoration: none; color: inherit; }
+/* 1. Define the Global Animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-/* Navigation */
+/* 2. Seamless Animated Nav */
 .nav {
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 0; width: 100%;
-  background: var(--main-color);
+  top: 0; 
+  width: 100%;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  /* Dark moving gradient */
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #030712, #1e1b4b);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .nav-list { display: flex; list-style: none; }
 .nav-list a {
@@ -52,15 +63,17 @@ a { text-decoration: none; color: inherit; }
 .nav-list a:hover { color: var(--accent); transform: translateY(-3px); }
 
 
-/* Welcome Section */
 .welcome-section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10rem 2rem;
-  background: linear-gradient(135deg, #1e1e2f 0%, #000000 100%);
+  padding: 12rem 2rem 6rem 2rem; /* Added top padding for fixed nav */
+  /* Same gradient as Nav for a seamless flow */
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #030712, #1e1b4b);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
   text-align: center;
 }
 
@@ -73,19 +86,20 @@ a { text-decoration: none; color: inherit; }
   margin-top: 4rem;
 }
 
+/* Since the background is moving, these "glass" cards look amazing on top */
 .service-card {
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 3rem 2rem;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.4s ease;
 }
 
 .service-card:hover {
-  background: rgba(255, 127, 80, 0.1);
+  background: rgba(255, 127, 80, 0.15); /* Tinted with your accent color */
   border-color: var(--accent);
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.02);
 }
 
 .service-card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 1.5rem; }
