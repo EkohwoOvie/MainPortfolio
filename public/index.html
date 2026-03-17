@@ -51,6 +51,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
 <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,400&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net"></script>
 <!-- START OF NAV -->
 <nav id="navbar" class="nav">
   <ul class="nav-list">
@@ -70,13 +71,78 @@
 
 <!-- START OF WELCOME SECTION -->
 <section id="welcome-section" class="welcome-section">
-  <h1>What do you need?</h1>
-  <p>- Shopping and services Websites</p>
-  <p>- Examination systems (CBT)</p>
-  <p>- HR and Payroll systems</p>
-  <p>- UI/UX</p>
-  <p>Just send a dm and it will be built for your organisation</p>
+  <div class="welcome-content">
+    <h1>Custom Software Solutions</h1>
+    <p>Professional development tailored to your organization.</p>
+    
+    <div class="services-grid">
+      <div class="service-card" onclick="openBooking('Shopping and services Websites')">
+        <i class="fas fa-shopping-cart"></i>
+        <h3>Websites</h3>
+      </div>
+      <div class="service-card" onclick="openBooking('Examination systems (CBT)')">
+        <i class="fas fa-laptop-code"></i>
+        <h3>CBT Systems</h3>
+      </div>
+      <div class="service-card" onclick="openBooking('HR and Payroll systems')">
+        <i class="fas fa-users-cog"></i>
+        <h3>HR & Payroll</h3>
+      </div>
+      <div class="service-card" onclick="openBooking('UI/UX')">
+        <i class="fas fa-paint-brush"></i>
+        <h3>UI/UX Design</h3>
+      </div>
+       <div class="service-card" onclick="openBooking('Content and Socials')">
+        <i class="fas fa-users-cog"></i>
+        <h3>Content Creation & Social Media Management</h3>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- BOOKING MODAL -->
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeBooking()">&times;</span>
+        <h2 style="color: var(--accent)">Request Service</h2>
+       <form action="https://formsubmit.co/ekohwoovie@gmail.com" method="POST">
+
+    <!-- CUSTOM REDIRECT: Redirects user after submission -->
+    <input type="hidden" name="_next" value="https://ekohwosportfolio.netlify.app">
+    
+    <!-- OPTIONAL CONFIG: Disable captcha for a smoother feel -->
+    <!-- input type="hidden" name="_captcha" value="false" -->
+
+    <!-- Your existing fields -->
+    <div id="form-fields">
+    <select id="serviceSelect" name="Service Type">
+        <option value="Shopping and services Websites">Shopping and services Websites</option>
+        <option value="Examination systems (CBT)">Examination systems (CBT)</option>
+        <option value="HR and Payroll systems">HR and Payroll systems</option>
+        <option value="UI/UX">UI/UX Design</option>
+        <option value="Content and Socials">Content Creation & Social Media Management</option>
+      </select>
+
+     <input type="text" name="user_name" placeholder="Full Name" required>
+     <input type="tel" name="user_phone" placeholder="Phone Number" required>
+     <textarea name="message" placeholder="Tell me about your project..."></textarea>
+     <button type="submit">Send Request</button>
+    </div>
+     <div id="success-msg" style="display:none; text-align:center; padding: 20px;">
+        <i class="fas fa-check-circle" style="font-size: 5rem; color: #ff7f50; margin-bottom: 15px;"></i>
+        <h2>Thank You!</h2>
+        <p>Your request has been received. I'll reach out to you soon.</p>
+        <button type="button" onclick="closeBooking()" style="margin-top:20px;">Back to Portfolio</button>
+    </div>
+    </form>
+  </div>
+</div>
+<div id="success-message" style="display:none; text-align:center; padding: 20px;">
+  <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+  <h3>Request Sent!</h3>
+  <p>I'll get back to you within 24 hours.</p>
+  <button onclick="closeBooking()" class="btn-submit">Close</button>
+</div>
 
 <!-- END OF WELCOME SECTION -->
 
@@ -147,5 +213,39 @@
   <div>&copy; PredeV - Builds</div>
   </p>
   <!-- END OF FOOTER SECTION --> 
+<script>
+    // Function to open the modal and set the service
+    function openBooking(service) {
+        document.getElementById('bookingModal').style.display = 'block';
+        document.getElementById('form-fields').style.display = 'block';
+        document.getElementById('success-msg').style.display = 'none';
+        if(service) document.getElementById('serviceSelect').value = service;
+    }
+
+    function closeBooking() {
+        document.getElementById('bookingModal').style.display = 'none';
+        // Clean the URL so the message doesn't pop up again on refresh
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    // Check if we just returned from a successful submission
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'success') {
+            document.getElementById('bookingModal').style.display = 'block';
+            document.getElementById('form-fields').style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+        }
+    }
+
+    // Close modal if user clicks outside of the box
+    window.onclick = function(event) {
+        let modal = document.getElementById("bookingModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
   </body>
 </html>
